@@ -22,12 +22,9 @@ class SignUpWidget extends StatefulWidget {
 
 class SignUpWidgetState extends State<SignUpWidget> {
   final TextEditingController _firstNameController = TextEditingController();
-
   final TextEditingController _emailController = TextEditingController();
-
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   GlobalKey<FormState>? _formKey;
 
   final FocusNode _fNameFocus = FocusNode();
@@ -110,10 +107,10 @@ class SignUpWidgetState extends State<SignUpWidget> {
                     top: Dimensions.marginSizeSmall),
                 child: CustomPasswordTextField(
                   hintTxt: 'Password',
-                  controller: _passwordController,
                   focusNode: _passwordFocus,
                   nextNode: _confirmPasswordFocus,
-                  textInputAction: TextInputAction.next,
+                  controller: _passwordController,
+                  // textInputAction: TextInputAction.next,
                 ),
               ),
               Container(
@@ -123,8 +120,8 @@ class SignUpWidgetState extends State<SignUpWidget> {
                     top: Dimensions.marginSizeSmall),
                 child: CustomPasswordTextField(
                   hintTxt: 'Password Confirmation',
-                  controller: _confirmPasswordController,
                   focusNode: _confirmPasswordFocus,
+                  controller: _confirmPasswordController,
                   textInputAction: TextInputAction.done,
                 ),
               ),

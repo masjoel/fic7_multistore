@@ -1,5 +1,6 @@
-import 'package:fic7_multistore/bloc/bloc/logout_bloc.dart';
+import 'package:fic7_multistore/bloc/logout/logout_bloc.dart';
 import 'package:fic7_multistore/ui/auth/auth_page.dart';
+import 'package:fic7_multistore/ui/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,13 +35,14 @@ class _HomePageState extends State<DashboardPage> {
     });
 
     _screens = [
-      const Center(
-        child: Column(
-          children: [
-            Text('Home'),
-          ],
-        ),
-      ),
+      const HomePage(),
+      // const Center(
+      //   child: Column(
+      //     children: [
+      //       Text('Home'),
+      //     ],
+      //   ),
+      // ),
       const Center(
         child: Text('Order'),
       ),
@@ -91,7 +93,7 @@ class _HomePageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(token)),
+      // appBar: AppBar(title: Text(token)),
       key: _scaffoldKey,
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Theme.of(context).primaryColor,

@@ -61,7 +61,7 @@ class _AuthPageState extends State<AuthPage> {
                                 curve: Curves.easeInOut),
                             child: Column(
                               children: [
-                                Text('Sigin',
+                                Text('SignIn',
                                     style: isLoginPage
                                         ? titilliumSemiBold
                                         : titilliumRegular),
@@ -83,7 +83,7 @@ class _AuthPageState extends State<AuthPage> {
                                 curve: Curves.easeInOut),
                             child: Column(
                               children: [
-                                Text('Signup',
+                                Text('SignUp',
                                     style: !isLoginPage
                                         ? titilliumSemiBold
                                         : titilliumRegular),

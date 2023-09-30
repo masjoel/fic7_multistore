@@ -82,7 +82,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                 Dimensions.paddingSizeSmall),
                             child: ProductSpecification(
                                 productSpecification:
-                                    widget.product.descripton!),
+                                    widget.product.description!),
                           ),
                           const SizedBox(),
                         ],

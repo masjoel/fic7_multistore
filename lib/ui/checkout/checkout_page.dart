@@ -24,7 +24,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
   int subPrice = 0;
   int totalPrice = 0;
   List<Item> items = [];
-  int shippingCost = 22000;
+  int shippingCost = 20000;
+  String shipper = 'TIKI';
 
   @override
   Widget build(BuildContext context) {
@@ -204,9 +205,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
             orElse: () {
               return InkWell(
                 onTap: () {
+                  // Item ongkirItem = Item(id: 104, quantity: 1);
+                  // items.add(ongkirItem);
                   final requestModel = OrderRequestModel(
-                    items: items,
+                    items: items, 
                     totalPrice: totalPrice,
+                    shipper: shipper,
+                    shippingCost: shippingCost,
                     deliveryAddress: _shoppingAddress.text,
                     sellerId: 4,
                   );

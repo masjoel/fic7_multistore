@@ -1,9 +1,7 @@
+import 'package:fic7_multistore/ui/checkout/checkout_page.dart';
 import 'package:fic7_multistore/utils/price_ext.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
 
 import '../../../bloc/checkout/checkout_bloc.dart';
 import '../../../data/models/products_response_model.dart';
@@ -154,9 +152,11 @@ class CartBottomSheetState extends State<CartBottomSheet> {
                 //     digitalProduct: true),
                 ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      quantity -= 1;
-                    });
+                    if (quantity > 1) {
+                      setState(() {
+                        quantity -= 1;
+                      });
+                    }
                   },
                   child: const Text('-'),
                 ),
@@ -210,7 +210,14 @@ class CartBottomSheetState extends State<CartBottomSheet> {
                   const SizedBox(width: Dimensions.paddingSizeDefault),
                   Expanded(
                     child: CustomButton(
-                        isBuy: true, buttonText: 'Buy Now', onTap: () {}),
+                        isBuy: true,
+                        buttonText: 'Buy Now',
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return const CheckoutPage();
+                          }));
+                        }),
                   ),
                 ],
               ),

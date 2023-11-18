@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/checkout/checkout_bloc.dart';
+import '../../../common/global_variables.dart';
 import '../../../utils/color_resources.dart';
 import '../../../utils/custom_themes.dart';
 import '../../../utils/dimensions.dart';
@@ -51,7 +52,7 @@ class CartWidget extends StatelessWidget {
                     placeholder: Images.placeholder,
                     height: 60,
                     width: 60,
-                    image: productQuantity.product.imageProduct!,
+                    image: productQuantity.product.imageProduct.contains('upload/images') ? GlobalVariables.baseUrl + productQuantity.product.imageProduct : productQuantity.product.imageProduct,
                     imageErrorBuilder: (c, o, s) => Image.asset(
                       Images.placeholder,
                       fit: BoxFit.cover,
@@ -72,7 +73,7 @@ class CartWidget extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                            child: Text(productQuantity.product.name!,
+                            child: Text(productQuantity.product.name,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: titilliumBold.copyWith(
@@ -89,7 +90,8 @@ class CartWidget extends StatelessWidget {
                               context.read<CheckoutBloc>().add(
                                     CheckoutEvent.removeToCart(
                                         productQuantity.product,
-                                        productQuantity.quantity),
+                                        productQuantity.quantity,
+                                        productQuantity.seller),
                                   );
                             },
                             child: SizedBox(

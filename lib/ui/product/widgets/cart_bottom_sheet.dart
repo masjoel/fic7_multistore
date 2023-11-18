@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/checkout/checkout_bloc.dart';
+import '../../../common/global_variables.dart';
 import '../../../data/models/products_response_model.dart';
 import '../../../utils/color_resources.dart';
 import '../../../utils/custom_themes.dart';
@@ -14,10 +15,12 @@ import '../../base_widgets/button/custom_button.dart';
 class CartBottomSheet extends StatefulWidget {
   final Function? callback;
   final Product product;
+  // final User seller;
   const CartBottomSheet({
     Key? key,
     this.callback,
     required this.product,
+    // required this.seller,
   }) : super(key: key);
 
   @override
@@ -89,7 +92,7 @@ class CartBottomSheetState extends State<CartBottomSheet> {
                             borderRadius: BorderRadius.circular(5),
                             child: FadeInImage.assetNetwork(
                               placeholder: Images.placeholder,
-                              image: widget.product.imageProduct!,
+                              image: widget.product.imageProduct.contains('upload/images') ? GlobalVariables.baseUrl + widget.product.imageProduct : widget.product.imageProduct,
                               imageErrorBuilder: (c, o, s) =>
                                   Image.asset(Images.placeholder),
                             ),
@@ -100,7 +103,7 @@ class CartBottomSheetState extends State<CartBottomSheet> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(widget.product.name!,
+                                Text(widget.product.name,
                                     style: titilliumRegular.copyWith(
                                         fontSize: Dimensions.fontSizeLarge),
                                     maxLines: 2,
@@ -187,7 +190,7 @@ class CartBottomSheetState extends State<CartBottomSheet> {
                 const Text('Total Price', style: robotoBold),
                 const SizedBox(width: Dimensions.paddingSizeSmall),
                 Text(
-                  '${widget.product.price! * quantity}'.formatPrice(),
+                  '${widget.product.price * quantity}'.formatPrice(),
                   style: titilliumBold.copyWith(
                       color: ColorResources.getPrimary(context),
                       fontSize: Dimensions.fontSizeLarge),
@@ -202,7 +205,7 @@ class CartBottomSheetState extends State<CartBottomSheet> {
                         onTap: () {
                           context.read<CheckoutBloc>().add(
                                 CheckoutEvent.addToCart(
-                                    widget.product, quantity),
+                                    widget.product, quantity, widget.product.user.id),
                               );
                           Navigator.pop(context);
                         }),

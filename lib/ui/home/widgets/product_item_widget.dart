@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-
+import '../../../common/global_variables.dart';
 import '../../../data/models/products_response_model.dart';
 import '../../../utils/color_resources.dart';
 import '../../../utils/custom_themes.dart';
@@ -42,27 +42,29 @@ class ProductItemWidget extends StatelessWidget {
         child: Stack(children: [
           Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             // Product Image
-            Container(
-              height: 150,
-              decoration: BoxDecoration(
-                color: ColorResources.getIconBg(context),
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)),
-              ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)),
-                child: FadeInImage.assetNetwork(
-                  placeholder: Images.placeholder,
-                  fit: BoxFit.cover,
-                  height: MediaQuery.of(context).size.width / 2.45,
-                  image: product.imageProduct!,
-                  imageErrorBuilder: (c, o, s) => Image.asset(
-                      Images.placeholder,
-                      fit: BoxFit.cover,
-                      height: MediaQuery.of(context).size.width / 2.45),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: ColorResources.getIconBg(context),
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                ),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  child: FadeInImage.assetNetwork(
+                    placeholder: Images.placeholder,
+                    fit: BoxFit.cover,
+                    height: MediaQuery.of(context).size.width / 2.45,
+                    // image: product.imageProduct!,
+                    image: product.imageProduct.contains('upload/images') ? GlobalVariables.baseUrl + product.imageProduct : product.imageProduct,
+                    imageErrorBuilder: (c, o, s) => Image.asset(
+                        Images.placeholder,
+                        fit: BoxFit.cover,
+                        height: MediaQuery.of(context).size.width / 2.45),
+                  ),
                 ),
               ),
             ),
@@ -79,7 +81,7 @@ class ProductItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(product.name ?? '-',
+                    Text(product.name,
                         textAlign: TextAlign.center,
                         style: robotoRegular.copyWith(
                             fontSize: Dimensions.fontSizeSmall,

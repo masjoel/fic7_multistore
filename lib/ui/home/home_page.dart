@@ -268,10 +268,10 @@ class _HomePageState extends State<HomePage> {
                           delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
                               return ProductItemWidget(
-                                product: model.data![index],
+                                product: model.data[index],
                               );
                             },
-                            childCount: model.data!.length,
+                            childCount: model.data.length,
                           ),
                         ),
                       );

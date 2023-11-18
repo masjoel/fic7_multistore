@@ -43,10 +43,12 @@ class OrderRequestModel {
 class Item {
     final int id;
     final int quantity;
+    final int sellerId;
 
     Item({
         required this.id,
         required this.quantity,
+        required this.sellerId,
     });
 
     factory Item.fromJson(String str) => Item.fromMap(json.decode(str));
@@ -56,10 +58,12 @@ class Item {
     factory Item.fromMap(Map<String, dynamic> json) => Item(
         id: json["id"],
         quantity: json["quantity"],
+        sellerId: json["sellerId"],
     );
 
     Map<String, dynamic> toMap() => {
         "id": id,
         "quantity": quantity,
+        "sellerId": sellerId,
     };
 }

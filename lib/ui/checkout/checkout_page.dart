@@ -1,9 +1,11 @@
+import 'package:fic7_multistore/data/models/products_response_model.dart';
 import 'package:fic7_multistore/utils/price_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/checkout/checkout_bloc.dart';
 import '../../bloc/order/order_bloc.dart';
+import '../../common/global_variables.dart';
 import '../../data/models/request/order_request_model.dart';
 import '../../utils/color_resources.dart';
 import '../../utils/custom_themes.dart';
@@ -36,11 +38,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
           return const CircularProgressIndicator();
         }, loaded: (products) {
           items = products
-              .map((e) => Item(id: e.product.id!, quantity: e.quantity))
+              .map((e) => Item(id: e.product.id, quantity: e.quantity, sellerId: e.seller))
               .toList();
           products.forEach(
             (element) {
-              subPrice += element.quantity * element.product.price!;
+              subPrice += element.quantity * element.product.price;
             },
           );
           totalPrice = subPrice + shippingCost;
@@ -101,7 +103,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             fit: BoxFit.cover,
                             width: 50,
                             height: 50,
-                            image: productQuantity.product.imageProduct!,
+                            image: productQuantity.product.imageProduct.contains('upload/images') ? GlobalVariables.baseUrl + productQuantity.product.imageProduct : productQuantity.product.imageProduct,
                             imageErrorBuilder: (c, o, s) => Image.asset(
                                 Images.placeholder,
                                 fit: BoxFit.cover,
@@ -120,7 +122,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      productQuantity.product.name!,
+                                      productQuantity.product.name,
                                       style: titilliumRegular.copyWith(
                                           fontSize: Dimensions.fontSizeDefault,
                                           color: ColorResources.getPrimary(
@@ -133,7 +135,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     width: Dimensions.paddingSizeSmall,
                                   ),
                                   Text(
-                                    '${productQuantity.product.price! * productQuantity.quantity}'
+                                    '${productQuantity.product.price * productQuantity.quantity}'
                                         .formatPrice(),
                                     style: titilliumSemiBold.copyWith(
                                         fontSize: Dimensions.fontSizeLarge),
@@ -205,15 +207,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
             orElse: () {
               return InkWell(
                 onTap: () {
-                  // Item ongkirItem = Item(id: 104, quantity: 1);
-                  // items.add(ongkirItem);
                   final requestModel = OrderRequestModel(
                     items: items, 
                     totalPrice: totalPrice,
                     shipper: shipper,
                     shippingCost: shippingCost,
                     deliveryAddress: _shoppingAddress.text,
-                    sellerId: 4,
+                    sellerId:items[0].sellerId,
                   );
                   context.read<OrderBloc>().add(OrderEvent.order(requestModel));
                   context.read<CheckoutBloc>().add(const CheckoutEvent.clear());

@@ -22,7 +22,7 @@ class ProductTitleView extends StatelessWidget {
           children: [
             Row(children: [
               Expanded(
-                  child: Text(product.name!,
+                  child: Text(product.name,
                       style: titleRegular.copyWith(
                           fontSize: Dimensions.fontSizeLarge),
                       maxLines: 2)),
@@ -30,7 +30,7 @@ class ProductTitleView extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    '${product.price!}'.formatPrice(),
+                    '${product.price}'.formatPrice(),
                     style: titilliumBold.copyWith(
                         color: ColorResources.getPrimary(context),
                         fontSize: Dimensions.fontSizeLarge),

@@ -60,10 +60,10 @@ class _CategoryProductsPageState extends State<CategoryProductsPage> {
                           horizontal: Dimensions.paddingSizeSmall),
                       physics: const BouncingScrollPhysics(),
                       crossAxisCount: 2,
-                      itemCount: model.data!.length,
+                      itemCount: model.data.length,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
-                        return ProductItemWidget(product: model.data![index]);
+                        return ProductItemWidget(product: model.data[index]);
                       },
                     ),
                   );

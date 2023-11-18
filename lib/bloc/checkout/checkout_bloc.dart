@@ -14,6 +14,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       final productQuantity = ProductQuantity(
         product: event.product,
         quantity: event.quantity,
+        seller: event.seller,
       );
 
       // list of productquatity A

@@ -1,3 +1,4 @@
 class GlobalVariables {
-  static const baseUrl = 'https://a2d4-157-119-223-129.ngrok-free.app';
+  static const baseUrl = 'https://multistore.codingflutter.my.id';
+  // static const baseUrl = 'http://192.168.0.108:8000';
 }

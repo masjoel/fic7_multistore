@@ -63,7 +63,7 @@ class CartPageState extends State<CartPage> {
                         products.forEach(
                           (element) {
                             totalPrice +=
-                                element.quantity * element.product.price!;
+                                element.quantity * element.product.price;
                           },
                         );
                         return Text(

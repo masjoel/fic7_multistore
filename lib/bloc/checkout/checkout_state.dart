@@ -11,9 +11,11 @@ class CheckoutState with _$CheckoutState {
 class ProductQuantity {
   final Product product;
   int quantity;
+  int seller;
   ProductQuantity({
     required this.product,
     required this.quantity,
+    required this.seller,
   });
 
   @override
@@ -22,7 +24,8 @@ class ProductQuantity {
 
     return other is ProductQuantity &&
         other.product == product &&
-        other.quantity == quantity;
+        other.quantity == quantity &&
+        other.seller == seller;
   }
 
   @override
